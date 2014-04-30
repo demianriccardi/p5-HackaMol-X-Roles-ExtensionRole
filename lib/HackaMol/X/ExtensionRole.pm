@@ -9,7 +9,7 @@ use Carp;
 
 with qw(HackaMol::ExeRole HackaMol::PathRole);
 
-requires qw(_build_map_in _build_map_out);
+requires qw(_build_map_in _build_map_out build_command);
 
 has 'mol' => (
     is  => 'ro',
@@ -30,20 +30,6 @@ has 'map_out' => (
     builder   => '_build_map_out',
     lazy      => 1,
 );
-
-sub build_command {
-    # exe -options file.inp -moreoptions > file.out
-    my $self = shift;
-    return 0 unless $self->exe;
-    my $cmd;
-    $cmd = $self->exe;
-    $cmd .= " " . $self->in_fn->stringify    if $self->has_in_fn;
-    $cmd .= " " . $self->exe_endops          if $self->has_exe_endops;
-    $cmd .= " > " . $self->out_fn->stringify if $self->has_out_fn;
-
-    # no cat of out_fn because of options to run without writing, etc
-    return $cmd;
-}
 
 sub map_input {
 
@@ -97,54 +83,31 @@ __END__
 
 =head1 SYNOPSIS
     
-   use Modern::Perl;
-   use HackaMol;
-   use HackaMol::X::Calculator;  # consumes this role
+    package HackaMol::X::SomeExtension;
+    use Moose;
 
-   my $hack = HackaMol->new( 
-                             name => "hackitup" , 
-                             data => "local_pdbs",
-                           );
-    
-   my $i = 0;
+    with qw(HackaMol::X::ExtensionRole);
 
-   foreach my $pdb ($hack->data->children(qr/\.pdb$/)){
+    sub _build_map_in{
+      my $sub_cr = sub { return (@_) };
+      return $sub_cr;
+    }
 
-      my $mol = $hack->read_file_mol($pdb);
+    sub _build_map_out{
+      my $sub_cr = sub { return (@_) };
+      return $sub_cr;
+    }
 
-      my $Calc = HackaMol::X::Calculator->new (
-                    molecule => $mol,
-                    scratch  => 'realtmp/tmp',
-                    in_fn    => 'calc.inp'
-                    out_fn   => "calc-$i.out"
-                    map_in   => \&input_map,
-                    map_out  => \&output_map,
-                    exe      => '~/bin/xyzenergy < ', 
-      );     
- 
-      $Calc->map_input;
-      $Calc->capture_sys_command;
-      my $energy = $Calc->map_output(627.51);
+    sub BUILD {
+      my $self = shift;
 
-      printf ("Energy from xyz file: %10.6f\n", $energy);
+      if ( $self->has_scratch ) {
+          $self->scratch->mkpath unless ( $self->scratch->exists );
+      }
+    }
 
-      $i++;
-
-   }
-
-   #  our functions to map molec info to input and from output
-   sub input_map {
-     my $calc = shift;
-     $calc->mol->print_xyz($calc->in_fn);
-   }
-
-   sub output_map {
-     my $calc   = shift;
-     my $conv   = shift;
-     my @eners  = map { /ENERGY= (-*\d+.\d+)/; $1*$conv } 
-                  grep {/ENERGY= -*\d+.\d+/} $calc->out_fn->lines; 
-     return pop @eners; 
-   }
+    no Moose;
+    1;
 
 =head1 DESCRIPTION
 

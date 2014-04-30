@@ -3,10 +3,10 @@ HackaMol-X-ExtensionRole
 
 VERSION
 ========
-developer version 0.00_1 
+developer version 0.00_2 
 Available for testing from cpan.org:
 
-please see *[HackaMol::X::ExtensionRole on MetaCPAN](https://metacpan.org/release/DEMIAN/HackaMol-X-ExtensionRole-0.00_1) for formatted documentation.
+please see *[HackaMol::X::ExtensionRole on MetaCPAN](https://metacpan.org/release/DEMIAN/HackaMol-X-ExtensionRole-0.00_2) for formatted documentation.
 
 SYNOPSIS
 ========

@@ -18,6 +18,20 @@
     return $sub_cr;
   }
 
+  sub build_command {
+    # exe -options file.inp -moreoptions > file.out
+    my $self = shift;
+    return 0 unless $self->exe;
+    my $cmd;
+    $cmd = $self->exe;
+    $cmd .= " " . $self->in_fn->stringify    if $self->has_in_fn;
+    $cmd .= " " . $self->exe_endops          if $self->has_exe_endops;
+    $cmd .= " > " . $self->out_fn->stringify if $self->has_out_fn;
+
+    # no cat of out_fn because of options to run without writing, etc
+    return $cmd;
+  }
+
   sub BUILD {
     my $self = shift;
 
