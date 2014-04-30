@@ -1,0 +1,7 @@
+Revision history for {{$dist->name}}
+
+{{$NEXT}}
+
+0.00_2    2014-04-30 15:31:16EDT-0400 America/New_York
+    * removed build_command and made it required.  
+
