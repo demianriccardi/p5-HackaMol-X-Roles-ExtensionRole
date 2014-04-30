@@ -1,6 +1,6 @@
 package HackaMol::X::ExtensionRole;
 
-# ABSTRACT: Role to assist writing extensions to external programs
+# ABSTRACT: Role to assist writing HackaMol extensions to external programs
 use 5.008;
 use Moose::Role;
 use Capture::Tiny ':all';
