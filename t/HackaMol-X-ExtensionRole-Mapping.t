@@ -163,14 +163,6 @@ dir_not_exists_ok( "t/tmp", 'scratch directory does not exist' );
         scratch => "t/tmp",
     );
 
-    warning_is { $obj->map_input( $header, 0, 1 ) }
-    "in_fn and map_in attrs required to map input",
-      "map_input no map_in/in_fn";
-
-    warning_is { $obj->map_output }
-    "out_fn and map_out attrs required to map output",
-      "map_output no map_out/out_fn";
-
     $obj = Test::Extension->new(
         mol => $mol,
 
@@ -180,14 +172,6 @@ dir_not_exists_ok( "t/tmp", 'scratch directory does not exist' );
         scratch => "t/tmp",
     );
 
-    warning_is { $obj->map_input( $header, 0, 1 ) }
-    "in_fn and map_in attrs required to map input",
-      "map_input no map_in";
-
-    warning_is { $obj->map_output }
-    "out_fn and map_out attrs required to map output",
-      "map_output no map_out";
-
     $obj = Test::Extension->new(
         mol     => $mol,
         map_in  => $map_in,
@@ -196,14 +180,6 @@ dir_not_exists_ok( "t/tmp", 'scratch directory does not exist' );
         #in_fn  => "foo.inp",
         scratch => "t/tmp",
     );
-
-    warning_is { $obj->map_input( $header, 0, 1 ) }
-    "in_fn and map_in attrs required to map input",
-      "map_input no in_fn";
-
-    warning_is { $obj->map_output }
-    "out_fn and map_out attrs required to map output",
-      "map_output no out_fn";
 
     $obj = Test::Extension->new(
         mol     => $mol,
