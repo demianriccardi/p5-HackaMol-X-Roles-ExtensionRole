@@ -36,9 +36,8 @@ sub map_input {
     # pass everything and anything to map_in... i.e. keep @_ in tact
     my ($self) = @_;
     local $CWD = $self->scratch if ( $self->has_scratch );
-    my $input = &{ $self->map_in }(@_);
+    return ( &{ $self->map_in }(@_) );
 
-    return $input;
 }
 
 sub map_output {
@@ -46,8 +45,8 @@ sub map_output {
     # pass everything and anything to map_out... i.e. keep @_ in tact
     my ($self) = @_;
     local $CWD = $self->scratch if ( $self->has_scratch );
-    my $output = &{ $self->map_out }(@_);
-    return $output;
+    return ( &{ $self->map_out }(@_) );
+
 }
 
 sub capture_sys_command {
