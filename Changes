@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.00_3    2014-05-01 14:13:52EDT-0400 America/New_York
     * simplified map_input map_output
 
 0.00_2    2014-04-30 15:31:16EDT-0400 America/New_York
