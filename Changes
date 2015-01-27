@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+    * first release
 
 0.00_3    2014-05-01 14:13:52EDT-0400 America/New_York
     * simplified map_input map_output
