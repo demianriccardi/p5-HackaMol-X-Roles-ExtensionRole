@@ -7,7 +7,7 @@ use Capture::Tiny ':all';
 use File::chdir;
 use Carp;
 
-with qw(HackaMol::ExeRole HackaMol::PathRole);
+with qw(HackaMol::Roles::ExeRole HackaMol::Roles::PathRole);
 
 requires qw(_build_map_in _build_map_out build_command);
 
