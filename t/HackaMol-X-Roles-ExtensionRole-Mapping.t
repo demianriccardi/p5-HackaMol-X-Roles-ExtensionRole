@@ -6,7 +6,7 @@
   use Moose::Util::TypeConstraints;
   use namespace::autoclean;
 
-  with qw(HackaMol::X::ExtensionRole);
+  with qw(HackaMol::X::Roles::ExtensionRole);
 
   sub _build_map_in{
     my $sub_cr = sub { return (@_) };

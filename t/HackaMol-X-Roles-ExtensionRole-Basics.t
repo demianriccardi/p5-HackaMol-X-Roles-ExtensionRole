@@ -6,7 +6,7 @@
   use Moose::Util::TypeConstraints;
   use namespace::autoclean;
 
-  with qw(HackaMol::X::ExtensionRole);
+  with qw(HackaMol::X::Roles::ExtensionRole);
 
   sub _build_map_in{
     my $sub_cr = sub { return (@_) };
@@ -59,7 +59,7 @@ my $cwd = getcwd;
     my @attributes = qw(mol map_in map_out);
     my @methods    = qw(map_input map_output);
 
-    my @roles = qw(HackaMol::ExeRole HackaMol::PathRole);
+    my @roles = qw(HackaMol::Roles::ExeRole HackaMol::Roles::PathRole);
 
     map has_attribute_ok( 'Test::Extension', $_ ), @attributes;
     map can_ok( 'Test::Extension', $_ ), @methods;
