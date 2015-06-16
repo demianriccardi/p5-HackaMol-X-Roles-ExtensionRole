@@ -12,8 +12,9 @@ with qw(HackaMol::Roles::ExeRole HackaMol::Roles::PathRole);
 requires qw(_build_map_in _build_map_out build_command);
 
 has 'mol' => (
-    is  => 'ro',
+    is  => 'rw',
     isa => 'HackaMol::Molecule',
+    predicate => 'has_mol'
 );
 
 has 'map_in' => (
