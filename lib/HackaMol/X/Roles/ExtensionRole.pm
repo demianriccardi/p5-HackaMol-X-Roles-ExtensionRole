@@ -14,7 +14,8 @@ requires qw(_build_map_in _build_map_out build_command);
 has 'mol' => (
     is  => 'rw',
     isa => 'HackaMol::Molecule',
-    predicate => 'has_mol'
+    predicate => 'has_mol',
+    clearer   => 'clear_mol',
 );
 
 has 'map_in' => (
